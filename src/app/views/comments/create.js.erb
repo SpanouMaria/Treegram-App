@@ -1,0 +1,9 @@
+// Ενημέρωση του container των σχολίων με το νέο περιεχόμενο
+const commentsContainer = $("#comments-container-<%= @photo.id %>");
+commentsContainer.html("<%= j(render partial: 'photos/comments', locals: { photo: @photo }) %>");
+
+// Καθαρισμός της φόρμας σχολίων
+$("#comment-form-<%= @photo.id %> textarea").val("");
+
+// Εστίαση ξανά στο πεδίο σχολίων, αν θέλετε
+$("#comment-form-<%= @photo.id %> textarea").focus();

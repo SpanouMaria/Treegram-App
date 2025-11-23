@@ -1,0 +1,159 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path
+ *
+ * You can add application-wide styles here, and they will appear at the bottom of the compiled file
+ * Styles defined here will take precedence over those in other CSS/SCSS files within this directory
+ * It is recommended to create a new file for each style scope to maintain organization
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* General Styles */
+body
+  font-family: 'Open Sans Condensed', sans-serif /* Use a clean, modern font for the entire application */
+
+a
+  text-decoration: none                          /* Remove underline from links */
+  color: black                                   /* Set default link color to black */
+
+
+.logout_btn
+  position: fixed                                /* Fix the logout button to stay at the top-right */
+  right: 0
+  padding: 3%
+  margin: 15px
+
+
+.top_row
+  max-height: fill-available                     /* Set the maximum height to fill the available space */
+
+
+.add_photo_btn
+  position: fixed                                /* Fix the add photo button near the top-right */
+  right: 8%
+  padding: 3%
+  margin: 15px
+
+
+.email
+  font-size: 7em                                 /* Large font size for displaying email prominently */
+
+
+.user_att
+  position: fixed                                /* Position user attribute details on the left side */
+  left: 0
+  margin-left: 15px
+
+
+.photo-gallery
+  display: flex                                  /* Use flexbox to arrange photos */
+  flex-direction: column                         /* Stack photos vertically */
+  gap: 20px                                      /* Add spacing between photos */
+
+
+.user-photo
+  position: relative                             /* Position the photo container for overlay effects */
+  display: inline-block                          /* Ensure photos are displayed inline */
+
+
+.user-photo img
+  max-width: 100%                                /* Ensure images scale to fit within their container */
+  border: 2px solid #ccc                         /* Add a subtle border */
+  border-radius: 8px                             /* Slightly round the edges of photos */
+
+
+.photo-title
+  margin-top: 5px                                /* Add spacing above the title */
+  text-align: left                               /* Align text to the left */
+  font-weight: normal                            /* Use normal font weight for titles */
+  color: #333                                    /* Set a dark gray color for text */
+
+ 
+.hidden-title
+  display: none                                  /* Hide titles by default */
+
+
+.active-title
+  display: block                                 /* Show titles when active */
+
+
+.slideshow-container
+  position: relative                             /* Position slides relative to the container */
+  max-width: 100%                                /* Allow the slideshow to scale with the screen */
+  margin: auto                                   /* Center the slideshow */
+  overflow: hidden                               /* Hide overflow content */
+
+
+.mySlides
+  display: none                                  /* Hide slides by default */
+  text-align: center                             /* Center align slide content */
+
+
+.mySlides img
+  width: 100%                                    /* Make slides responsive */
+  border-radius: 8px                             /* Add rounded corners to slides */
+
+
+#comment-modal
+  display: none                                  /* Keep modal hidden by default */
+  position: fixed                                /* Position modal at the center of the screen */
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)               /* Center modal using transform */
+  z-index: 1001                                  /* Ensure the modal appears above other content */
+  background-color: white                        /* Set modal background to white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)     /* Add shadow for depth */
+  border-radius: 8px                             /* Round modal corners */
+  width: 20%                                     /* Set a default width */
+  height: auto                                   /* Adjust height to fit content */
+  padding: 10px                                  /* Add padding inside the modal */
+  max-height: 60vh                               /* Limit modal height for smaller screens */
+  overflow-y: auto                               /* Allow scrolling inside the modal if content exceeds height */
+
+
+#comment-modal-overlay
+  display: none                                  /* Hide the overlay by default */
+  position: fixed                                /* Cover the entire screen */
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: rgba(0, 0, 0, 0.5)               /* Add a semi-transparent dark background */
+  z-index: 1000                                  /* Place the overlay just behind the modal */
+
+
+.close-btn
+  position: absolute                             /* Position the close button inside the modal */
+  top: 10px
+  right: 10px
+  background: red                                /* Use a red background for the button */
+  color: white                                   /* Set button text color to white */
+  border: none                                   /* Remove button border */
+  padding: 5px 10px                              /* Add padding for clickable area */
+  cursor: pointer                                /* Show pointer on hover */
+  border-radius: 4px                             /* Round button corners */
+
+
+.close-btn:hover
+  background: darkred                            /* Change button color on hover */
+
+
+#modal-comments p
+  margin-bottom: 10px                            /* Add spacing between comments */
+  font-size: 14px                                /* Set font size for comment text */
+
+
+#comment-modal h3
+  margin-bottom: 10px                            /* Add spacing below the heading */
+  text-align: center                             /* Center align the heading text */
+  font-weight: bold                              /* Use bold font weight for headings */
+
+
+@media (max-width: 768px)
+  #comment-modal
+    width: 80%                                   /* Increase modal width for smaller screens */

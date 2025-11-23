@@ -1,0 +1,108 @@
+.row.top_row
+  .col-sm-6.user_att
+    %h2= @user.email
+    - if @user.avatar_file_name
+      = image_tag @user.avatar.url(:thumb)
+  .col-sm-6
+    = link_to 'Logout', log_out_path, class: ['btn', 'btn-danger', 'logout_btn']
+    = link_to 'Add Photo', new_user_photo_path(@user), class: ['btn', 'btn-success', 'add_photo_btn']
+%br/
+%br/
+
+%h2 All Users
+.row
+  - @all_users.each do |user|
+    .col-sm-4
+      %p
+        = user.email
+        - if current_user != user
+          - if current_user.followed_users.include?(user)
+            = button_to 'Unfollow', unfollow_user_path(user), method: :delete, class: ['btn', 'btn-warning']
+          - else
+            = button_to 'Follow', follow_user_path(user), method: :post, class: ['btn', 'btn-primary']
+
+%h2 Photos of <%= @user.email %>
+.row
+  - @photos.each do |photo|
+    .col-sm-4
+      .slideshow-container
+        - if photo.image
+          .mySlides
+            - if current_user == photo.user
+              = image_tag photo.image.url(:medium), class: "photo-image deletable", data: { photo_id: photo.id, current_user: true }
+            - else
+              = image_tag photo.image.url(:medium), class: "photo-image", data: { photo_id: photo.id, current_user: false }
+          %p
+            %strong Title:
+            = photo.title
+
+        %div{id: "comments-container-#{photo.id}"}
+          = render partial: 'photos/comments', locals: { photo: photo }
+
+        
+        %h4 Add a Comment:
+        = form_for [photo, Comment.new], remote: true, html: { id: "comment-form-#{photo.id}" } do |f|
+          = f.hidden_field :photo_id, value: photo.id, id: "photo-id-field-#{photo.id}"
+          = f.text_area :text, placeholder: "Write your comment here...", rows: 3, class: "form-control"
+          %br/
+          = f.submit "Add Comment", class: ['btn', 'btn-primary']
+        %hr/
+
+      - if current_user == photo.user
+        = button_to 'Delete Photo', photo_path(photo), method: :delete, data: { confirm: 'Are you sure you want to delete this photo and all its comments?' }, class: ['btn', 'btn-danger', 'btn-sm']
+
+%h2 Photos by Followed Users
+.row
+  - current_user.followed_users.each do |followed_user|
+    %h3= followed_user.email
+    .row
+      - followed_user.photos.order(created_at: :desc).each_with_index do |photo, index|
+        .col-sm-4
+          .slideshow-container{ data: { "slide-index" => index } }
+            - followed_user.photos.order(created_at: :desc).each_with_index do |slide_photo, slide_index|
+              - if slide_index == index
+                .mySlides{ style: "display: block;" }
+                  = image_tag slide_photo.image.url(:medium), class: "photo-image", data: { photo_id: slide_photo.id, current_user: false }
+                  %p.photo-title
+                    %strong Title:
+                    = slide_photo.title
+              - else
+                .mySlides{ style: "display: none;" }
+                  = image_tag slide_photo.image.url(:medium), class: "photo-image", data: { photo_id: slide_photo.id, current_user: false }
+                  %p.photo-title
+                    %strong Title:
+                    = slide_photo.title
+
+            %div.photo-comments
+              %h3 Comments:
+              - if photo.comments.any?
+                - photo.comments.each do |comment|
+                  %p
+                    %strong= comment.user.email
+                    = comment.text
+              - else
+                %p No comments yet.
+
+              %h4 Add a Comment:
+              = form_for([photo, Comment.new], remote: true, html: { id: "comment-form-#{photo.id}" }) do |f|
+                = f.hidden_field :photo_id, value: photo.id, id: "photo-id-field-#{photo.id}"
+                = f.text_area :text, placeholder: "Write your comment here...", rows: 3, class: "form-control"
+                %br/
+                = f.submit "Add Comment", class: ['btn', 'btn-primary']
+              %hr/
+
+/* Το modal μεταφέρεται ΕΞΩ από το loop */
+%div#comment-modal{ style: "display: none;" }
+  .modal-content
+    %h3 Photo Comments
+    %div#modal-comments
+      %p Loading comments...
+
+    %h4 Add a Comment:
+    = form_tag photo_comments_path(photo_id: ""), method: :post, remote: true, html: { id: "comment-form-modal" } do
+      = hidden_field_tag :photo_id, "", id: "photo-id-field"
+      = text_area_tag :text, nil, placeholder: "Write your comment here...", rows: 3, class: "form-control"
+      %br/
+      = submit_tag "Add Comment", class: ['btn', 'btn-primary']
+
+    %button.close-btn Close

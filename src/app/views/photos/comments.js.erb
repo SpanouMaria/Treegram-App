@@ -1,0 +1,2 @@
+$("#comments-container-<%= @photo.id %>").html("<%= j render(partial: 'photos/comments', locals: { photo: @photo }) %>");
+$("#comment-form-<%= @photo.id %> textarea").val("");

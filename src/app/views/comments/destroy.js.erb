@@ -1,0 +1,1 @@
+$("#comments-container-<%= @photo.id %>").html("<%= j(render partial: 'photos/comments', locals: { photo: @photo }) %>");
