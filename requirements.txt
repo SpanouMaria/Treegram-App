@@ -1,0 +1,13 @@
+# Ruby on Rails Environment
+rails
+sqlite3
+puma
+sass-rails
+webpacker
+turbo-rails
+jbuilder
+haml
+jquery-rails
+
+# JavaScript libraries
+jquery
