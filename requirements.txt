@@ -6,7 +6,47 @@ sass-rails
 webpacker
 turbo-rails
 jbuilder
-haml
+haml# Programming Languages
+C
+Java
+
+# Compilers / Tools
+gcc
+javac
+make
+
+# Math / Standard Libraries (C)
+math.h
+stdio.h
+stdlib.h
+time.h
+
+# Java Standard Libraries (αν γίνει σε Java)
+java.util.Random
+java.io.BufferedReader
+java.io.FileReader
+
+# Required Implementations
+MLP_network
+forward_pass
+backpropagation
+gradient_descent
+k_means
+
+# Required Activation Functions
+tanh
+relu
+softmax  # για επίπεδο εξόδου ταξινόμησης
+
+# Randomization Utilities
+random_initialization
+uniform_random(-1,1)
+
+# Data Handling
+file_input
+array_structures
+matrix_operations
+
 jquery-rails
 
 # JavaScript libraries
